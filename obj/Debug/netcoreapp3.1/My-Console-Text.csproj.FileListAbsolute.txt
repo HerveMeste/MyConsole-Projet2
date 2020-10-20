@@ -1,0 +1,13 @@
+C:\Users\Hervé\source\repos\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.exe
+C:\Users\Hervé\source\repos\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.deps.json
+C:\Users\Hervé\source\repos\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.runtimeconfig.json
+C:\Users\Hervé\source\repos\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.runtimeconfig.dev.json
+C:\Users\Hervé\source\repos\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.dll
+C:\Users\Hervé\source\repos\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.pdb
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.csprojAssemblyReference.cache
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.AssemblyInfoInputs.cache
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.AssemblyInfo.cs
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.csproj.CoreCompileInputs.cache
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.dll
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.pdb
+C:\Users\Hervé\source\repos\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.genruntimeconfig.cache
