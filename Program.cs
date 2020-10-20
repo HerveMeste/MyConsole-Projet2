@@ -26,8 +26,9 @@ namespace My_Console_Text
                     ChangeDirectory( _currentDirectory/* fournir l'argument de cd */);
                 }
                 else if (command == "dir")
-                {
-                    ListDirectory( /* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */);
+                { 
+                    ListDirectory(_currentDirectory  /*fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */);
+                    
                 }
             }
         }
