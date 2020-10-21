@@ -14,20 +14,22 @@ namespace My_Console_Text
     }
     public class MyConsole
     {
-        private String _currentDirectory = "C:\\";
+        private String _currentDirectory = "C:\\Users";
+        public string myDoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         public void Run()
         {
             while (true)
             {
                 String command = Prompt();
-                if (command == "cd")
+               
+                if (command.Substring(0,2) == "cd")
                 {
-                    ChangeDirectory( _currentDirectory/* fournir l'argument de cd */);
+                    ChangeDirectory(_currentDirectory, command);
                 }
                 else if (command == "dir")
                 {
-                    ListDirectory( /* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */);
+                    ListDirectory(_currentDirectory);/* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */
                 }
             }
         }
@@ -37,10 +39,12 @@ namespace My_Console_Text
             Console.Write(_currentDirectory + "> ");
             String command = Console.ReadLine();
             return command;
+            
         }
 
-        public void ChangeDirectory(String newPath)
+        public void ChangeDirectory(String newPath,string command)
         {
+            newPath = _currentDirectory + "/" + command.Substring(3);
             _currentDirectory = newPath;
         }
 
@@ -48,10 +52,13 @@ namespace My_Console_Text
         {
             IEnumerable<String> listedFiles = Directory.EnumerateFiles(directoryPath);
             IEnumerable<String> listedDirectories = Directory.EnumerateDirectories(directoryPath);
-            Console.WriteLine("{0} {1}", String.Join("\n", listedFiles), String.Join("\n", listedDirectories));
+            Console.WriteLine("{0}\n{1}", String.Join("\n", listedFiles), String.Join("\n", listedDirectories));
         }
     }
 
+   
+    
+    
     /*
     public abstract class Command // classe mere 
     {
