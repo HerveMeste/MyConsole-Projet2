@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace My_Console_Text
 {
     class Program
@@ -14,20 +15,21 @@ namespace My_Console_Text
     }
     public class MyConsole
     {
-        private String _currentDirectory = "C:\\";
+        private String _currentDirectory = "C:\\Users\\Hervé";
 
         public void Run()
         {
             while (true)
             {
                 String command = Prompt();
-                if (command == "cd")
+                if (command == "cd ..")
                 {
-                    ChangeDirectory( _currentDirectory/* fournir l'argument de cd */);
+                    ChangeDirectory(_currentDirectory);
                 }
                 else if (command == "dir")
-                {
-                    ListDirectory( /* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */);
+                { 
+                    ListDirectory(_currentDirectory  /*fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */);
+                    
                 }
             }
         }
@@ -41,7 +43,24 @@ namespace My_Console_Text
 
         public void ChangeDirectory(String newPath)
         {
-            _currentDirectory = newPath;
+            
+            try
+            {
+
+                string parent = Directory.GetParent(newPath).FullName;
+                _currentDirectory = parent;
+                /*Console.Write("\n" + parent);*/
+            }
+            catch (ArgumentNullException)
+            {
+                System.Console.WriteLine("Path is a null reference.");
+            }
+            catch (ArgumentException)
+            {
+                System.Console.WriteLine("Path is an empty string, " +
+                    "contains only white spaces, or " +
+                    "contains invalid characters.");
+            }
         }
 
         public void ListDirectory(String directoryPath)
@@ -50,19 +69,5 @@ namespace My_Console_Text
             IEnumerable<String> listedDirectories = Directory.EnumerateDirectories(directoryPath);
             Console.WriteLine("{0} {1}", String.Join("\n", listedFiles), String.Join("\n", listedDirectories));
         }
-    }
-
-    /*
-    public abstract class Command // classe mere 
-    {
-        public abstract string Command(string x);
-    }
-    class Dir : Command
-    {
-        public override string Command(string x)
-        {
-            return null;
-        }
-    }*/
-    
+    }    
 }
