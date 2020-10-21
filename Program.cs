@@ -26,7 +26,7 @@ namespace My_Console_Text
                
                 if (command.Substring(0,3) == "cd ")
                 {
-                    ChangeDirectory(_currentDirectory, command);
+                    ChangeDirectoryCd(_currentDirectory, command);
                 }
                 else if (command == "dir")
                 {
@@ -47,7 +47,7 @@ namespace My_Console_Text
             
         }
 
-        public void ChangeDirectory(String newPath, string command)
+        public void ChangeDirectoryCd(String newPath, string command)
         {
             string chem = _currentDirectory + "\\" + command.Substring(3);
             string[] tabfichier = Directory.GetFileSystemEntries(_currentDirectory);
