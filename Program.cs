@@ -54,17 +54,34 @@ namespace My_Console_Text
 
         public void ChangeDirectoryCd(String newPath, string command)
         {
-            string chem = _currentDirectory + "\\" + command.Substring(3);
+            string chem = "";
+            if (_currentDirectory == "C:\\")
+            {
+                chem = _currentDirectory + command.Substring(3);
+            }
+            else
+            {
+                chem = _currentDirectory + "\\" + command.Substring(3);
+            }
             string[] tabfichier = Directory.GetFileSystemEntries(_currentDirectory);
             for (int i = 0; i < tabfichier.Length; i++)
             {
                 if (tabfichier[i] == chem)
                 {
-
-                    newPath = _currentDirectory + "\\" + command.Substring(3);
-                    _currentDirectory = newPath;
-                    return;
-
+                    if(_currentDirectory == "C:\\")
+                    {
+                        
+                        newPath = _currentDirectory + command.Substring(3);
+                        _currentDirectory = newPath;
+                        
+                        return;
+                    }
+                    else
+                    {
+                        newPath = _currentDirectory + "\\" + command.Substring(3);
+                        _currentDirectory = newPath;
+                        return;
+                    }
                 }
             }
             Console.WriteLine("repertoire inexistant");
