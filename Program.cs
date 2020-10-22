@@ -60,7 +60,7 @@ namespace My_Console_Text
                 chem = _currentDirectory + command.Substring(3);
             }
             else
-            {
+            {            
                 chem = _currentDirectory + "\\" + command.Substring(3);
             }
             string[] tabfichier = Directory.GetFileSystemEntries(_currentDirectory);
