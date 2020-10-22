@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\qwertyzerty\\.nuget\\packages\\": {}
+    "C:\\Users\\Wilder\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\qwertyzerty\\Desktop\\Projet\\My-console-text-\\My-Console-Text.csproj",
+      "projectUniqueName": "C:\\Users\\Wilder\\Desktop\\Projet\\My-console-text-\\My-Console-Text.csproj",
       "projectName": "My-Console-Text",
-      "projectPath": "C:\\Users\\qwertyzerty\\Desktop\\Projet\\My-console-text-\\My-Console-Text.csproj",
-      "packagesPath": "C:\\Users\\qwertyzerty\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\qwertyzerty\\Desktop\\Projet\\My-console-text-\\obj\\",
+      "projectPath": "C:\\Users\\Wilder\\Desktop\\Projet\\My-console-text-\\My-Console-Text.csproj",
+      "packagesPath": "C:\\Users\\Wilder\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Wilder\\Desktop\\Projet\\My-console-text-\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\qwertyzerty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Wilder\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

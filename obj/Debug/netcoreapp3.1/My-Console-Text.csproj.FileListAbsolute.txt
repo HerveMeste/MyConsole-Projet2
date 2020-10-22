@@ -24,3 +24,16 @@ C:\Users\qwertyzerty\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-
 C:\Users\qwertyzerty\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.dll
 C:\Users\qwertyzerty\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.pdb
 C:\Users\qwertyzerty\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.genruntimeconfig.cache
+C:\Users\Wilder\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.exe
+C:\Users\Wilder\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.deps.json
+C:\Users\Wilder\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.runtimeconfig.json
+C:\Users\Wilder\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.runtimeconfig.dev.json
+C:\Users\Wilder\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.dll
+C:\Users\Wilder\Desktop\Projet\My-console-text-\bin\Debug\netcoreapp3.1\My-Console-Text.pdb
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.csprojAssemblyReference.cache
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.AssemblyInfoInputs.cache
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.AssemblyInfo.cs
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.csproj.CoreCompileInputs.cache
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.dll
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.pdb
+C:\Users\Wilder\Desktop\Projet\My-console-text-\obj\Debug\netcoreapp3.1\My-Console-Text.genruntimeconfig.cache

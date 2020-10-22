@@ -25,13 +25,13 @@ namespace My_Console_Text
                 String command = Prompt();
 
 
-                if (command.Substring(0, 3) == "cd ")
-                {
-                    ChangeDirectoryCd(_currentDirectory, command);
-                }
-                else if (command == "cd..")
+                if (command == "cd ..")
                 {
                     ChangeDirectory(_currentDirectory);
+                }
+                else if (command.Substring(0,3) == "cd ")
+                {
+                    ChangeDirectoryCd(_currentDirectory, command);
                 }
                 else if (command == "dir")
                 {
@@ -58,7 +58,6 @@ namespace My_Console_Text
             string[] tabfichier = Directory.GetFileSystemEntries(_currentDirectory);
             for (int i = 0; i < tabfichier.Length; i++)
             {
-                Console.WriteLine(tabfichier[i]);
                 if (tabfichier[i] == chem)
                 {
 
