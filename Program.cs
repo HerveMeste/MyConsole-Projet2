@@ -46,10 +46,9 @@ namespace My_Console_Text
             
             try
             {
-
                 string parent = Directory.GetParent(newPath).FullName;
                 _currentDirectory = parent;
-                /*Console.Write("\n" + parent);*/
+                
             }
             catch (ArgumentNullException)
             {
