@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -15,21 +16,30 @@ namespace My_Console_Text
     }
     public class MyConsole
     {
-        private String _currentDirectory = "C:\\Users\\Hervé";
-
+        private String _currentDirectory = "C:\\Users";
+        public string myDoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public void Run()
         {
             while (true)
             {
                 String command = Prompt();
+
+
                 if (command == "cd ..")
                 {
                     ChangeDirectory(_currentDirectory);
                 }
+                else if (command.Substring(0,3) == "cd ")
+                {
+                    ChangeDirectoryCd(_currentDirectory, command);
+                }
                 else if (command == "dir")
-                { 
-                    ListDirectory(_currentDirectory  /*fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */);
-                    
+                {
+                    ListDirectory(_currentDirectory);/* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */
+                }              
+                else
+                {
+                    Console.WriteLine("mauvaise commande");
                 }
             }
         }
@@ -39,16 +49,50 @@ namespace My_Console_Text
             Console.Write(_currentDirectory + "> ");
             String command = Console.ReadLine();
             return command;
+
+        }
+
+        public void ChangeDirectoryCd(String newPath, string command)
+        {
+            string chem = "";
+            if (_currentDirectory == "C:\\")
+            {
+                chem = _currentDirectory + command.Substring(3);
+            }
+            else
+            {            
+                chem = _currentDirectory + "\\" + command.Substring(3);
+            }
+            string[] tabfichier = Directory.GetFileSystemEntries(_currentDirectory);
+            for (int i = 0; i < tabfichier.Length; i++)
+            {
+                if (tabfichier[i] == chem)
+                {
+                    if(_currentDirectory == "C:\\")
+                    {
+                        
+                        newPath = _currentDirectory + command.Substring(3);
+                        _currentDirectory = newPath;
+                        
+                        return;
+                    }
+                    else
+                    {
+                        newPath = _currentDirectory + "\\" + command.Substring(3);
+                        _currentDirectory = newPath;
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine("repertoire inexistant");
         }
 
         public void ChangeDirectory(String newPath)
         {
-            
             try
-            {
+            {               
                 string parent = Directory.GetParent(newPath).FullName;
                 _currentDirectory = parent;
-                
             }
             catch (ArgumentNullException)
             {
@@ -60,13 +104,14 @@ namespace My_Console_Text
                     "contains only white spaces, or " +
                     "contains invalid characters.");
             }
+
         }
 
         public void ListDirectory(String directoryPath)
         {
             IEnumerable<String> listedFiles = Directory.EnumerateFiles(directoryPath);
             IEnumerable<String> listedDirectories = Directory.EnumerateDirectories(directoryPath);
-            Console.WriteLine("{0} {1}", String.Join("\n", listedFiles), String.Join("\n", listedDirectories));
+            Console.WriteLine("{0}\n{1}", String.Join("\n", listedFiles), String.Join("\n", listedDirectories));
         }
-    }    
+    }
 }
