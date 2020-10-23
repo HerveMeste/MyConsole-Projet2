@@ -27,15 +27,26 @@ namespace My_Console_Text
                                
                 if (command == "cd ..")
                 {
-                    ChangeDirectory(_currentDirectory);
+                    ChangeDirectory(_currentDirectory);// Revien au repertoire parents
                 }
                 else if (command.Length >= 2 && command.Substring(0,2) == "cd")
                 {
-                    ChangeDirectoryCd(_currentDirectory, command);
+                    ChangeDirectoryCd(_currentDirectory, command); // Ouvre un dossier ou affiche le chemin actuel
                 }
-                else if (command == "dir")
+                else if (command.Substring(0,3) == "dir" && command.Length >= 3)
                 {
-                    ListDirectory(_currentDirectory);/* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */
+                    if (command == "dir")
+                    {                        
+                       ListDirectory(_currentDirectory); //Affiche uniquement les dossiers
+                    }
+                    else if(command == "dir /l")
+                    {                        
+                        ListFiles(_currentDirectory); // Affiche uniquement les fichiers
+                    }
+                    else if(command.Substring(0,6) == "dir /t" && command.Length >= 6)// commence
+                    {
+                        Alphabetique(_currentDirectory, command.Substring(7));// commence a partir du 7eme charatere
+                    }
                 }              
                 else if (command == "exit")
                 {
@@ -58,7 +69,7 @@ namespace My_Console_Text
 
         public void ChangeDirectoryCd(String newPath, string command)
         {
-            string chem = "";
+            string chem;
             if (command == "cd")
             {
                 Console.WriteLine(_currentDirectory);
@@ -118,9 +129,40 @@ namespace My_Console_Text
 
         public void ListDirectory(String directoryPath)
         {
-            IEnumerable<String> listedFiles = Directory.EnumerateFiles(directoryPath);
             IEnumerable<String> listedDirectories = Directory.EnumerateDirectories(directoryPath);
-            Console.WriteLine("{0}\n{1}", String.Join("\n", listedFiles), String.Join("\n", listedDirectories));
+            foreach (string item in listedDirectories)
+            {
+                DateTime date = Directory.GetCreationTime(item);
+                Console.WriteLine(date + " " + item);
+            }
+        }
+
+        public void ListFiles(String directoryPath)
+        {
+            IEnumerable<String> listedFiles = Directory.EnumerateFiles(directoryPath);
+            foreach (string item in listedFiles)
+            {
+                DateTime date = Directory.GetCreationTime(item);
+                Console.WriteLine(date + " " + item);
+            }
+        }
+        public static void Alphabetique(string path, string searchPattern)
+        {
+            try
+            {
+                string[] dirs = Directory.GetDirectories(path, searchPattern);
+                Console.WriteLine("The number of directories starting with {0} is {1}.",searchPattern,  dirs.Length);
+
+                foreach (string dir in dirs)
+
+                {
+                    Console.WriteLine(dir);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
         }
     }
 }
