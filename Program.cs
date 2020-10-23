@@ -37,15 +37,15 @@ namespace My_Console_Text
                 {
                     if (command == "dir")
                     {                        
-                        ListDirectory(_currentDirectory);// Affiche uniquement les dossiers
+                       ListDirectory(_currentDirectory); //Affiche uniquement les dossiers
                     }
                     else if(command == "dir /l")
                     {                        
                         ListFiles(_currentDirectory); // Affiche uniquement les fichiers
                     }
-                    else if(command.Substring(0,6) == "dir /t" && command.Length >= 6)
+                    else if(command.Substring(0,6) == "dir /t" && command.Length >= 6)// commence
                     {
-                        Alphabetique(_currentDirectory, command.Substring(7));
+                        Alphabetique(_currentDirectory, command.Substring(7));// commence a partir du 7eme charatere
                     }
                 }              
                 else if (command == "exit")
@@ -130,29 +130,21 @@ namespace My_Console_Text
         public void ListDirectory(String directoryPath)
         {
             IEnumerable<String> listedDirectories = Directory.EnumerateDirectories(directoryPath);
-            Console.WriteLine("{0}\n", String.Join("\n", listedDirectories));
+            foreach (string item in listedDirectories)
+            {
+                DateTime date = Directory.GetCreationTime(item);
+                Console.WriteLine(date + " " + item);
+            }
         }
 
         public void ListFiles(String directoryPath)
         {
             IEnumerable<String> listedFiles = Directory.EnumerateFiles(directoryPath);
-            DateTime date = File.GetCreationTime(directoryPath);
-            Console.WriteLine("{0} \n", String.Join("\n", listedFiles, date));           
-        }
-
-        static void DisplayFileSystemInfoAttributes(FileSystemInfo fsi)
-        {
-            //Assume that this entry is a file.
-            //string entryType = "File";
-
-           // Determine if entry is really a directory
-           // if ((fsi.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
-           //{
-             //   entryType = "Directory";
-            //}
-            // Show this entry's type, name, and creation date.
-
-            Console.WriteLine("{0}", fsi.CreationTime);
+            foreach (string item in listedFiles)
+            {
+                DateTime date = Directory.GetCreationTime(item);
+                Console.WriteLine(date + " " + item);
+            }
         }
         public static void Alphabetique(string path, string searchPattern)
         {
