@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 
 
@@ -17,19 +18,18 @@ namespace My_Console_Text
     public class MyConsole
     {
         private String _currentDirectory = "C:\\Users";
-        public string myDoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public void Run()
         {
-            while (true)
+            
+            while(true)
             {
                 String command = Prompt();
-
-
+                               
                 if (command == "cd ..")
                 {
                     ChangeDirectory(_currentDirectory);
                 }
-                else if (command.Substring(0,3) == "cd ")
+                else if (command.Length >= 2 && command.Substring(0,2) == "cd")
                 {
                     ChangeDirectoryCd(_currentDirectory, command);
                 }
@@ -37,9 +37,13 @@ namespace My_Console_Text
                 {
                     ListDirectory(_currentDirectory);/* fournir l'argument de dir, si il n'y en a pas, c'est _currentDirectory */
                 }              
+                else if (command == "exit")
+                {
+                    break;
+                }
                 else
                 {
-                    Console.WriteLine("mauvaise commande");
+                    Console.WriteLine(command + " n’est pas reconnu en tant que commande interne \nou externe, un programme exécutable ou un fichier de commandes.");
                 }
             }
         }
@@ -55,7 +59,12 @@ namespace My_Console_Text
         public void ChangeDirectoryCd(String newPath, string command)
         {
             string chem = "";
-            if (_currentDirectory == "C:\\")
+            if (command == "cd")
+            {
+                Console.WriteLine(_currentDirectory);
+                return;
+            }
+            else if (_currentDirectory == "C:\\")
             {
                 chem = _currentDirectory + command.Substring(3);
             }
