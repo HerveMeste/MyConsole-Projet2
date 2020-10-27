@@ -17,6 +17,7 @@ namespace My_Console_Text
     }
     public class MyConsole
     {
+        List<string> history = new List<string>();
         private String _currentDirectory = "C:\\Users";
         public void Run()
         {
@@ -24,7 +25,7 @@ namespace My_Console_Text
             while(true)
             {
                 String command = Prompt();
-                               
+                history.Add(command);              
                 if (command == "cd ..")
                 {
                     ChangeDirectory(_currentDirectory);// Revien au repertoire parents
@@ -47,7 +48,22 @@ namespace My_Console_Text
                     {
                         Alphabetique(_currentDirectory, command.Substring(7));// commence a partir du 7eme charatere
                     }
-                }              
+                }
+                else if (command == "history")
+                {
+                    foreach(string item in history)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+                else if (command == "cls-history")
+                {
+                    history.Clear();
+                }
+                else if (command == "cls")
+                {
+                    Console.Clear();
+                }
                 else if (command == "exit")
                 {
                     break;
