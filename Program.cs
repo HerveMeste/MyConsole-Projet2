@@ -11,6 +11,7 @@ namespace My_Console_Text
     {
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.Green;
             MyConsole console = new MyConsole();
             console.Run();
         }
@@ -25,16 +26,17 @@ namespace My_Console_Text
             while(true)
             {
                 String command = Prompt();
-                history.Add(command);              
+                history.Add(command);
+                string[] commandSplit = command.Split();
                 if (command == "cd ..")
                 {
                     ChangeDirectory(_currentDirectory);// Revien au repertoire parents
                 }
-                else if (command.Length >= 2 && command.Substring(0,2) == "cd")
+                else if (commandSplit[0] == "cd")
                 {
                     ChangeDirectoryCd(_currentDirectory, command); // Ouvre un dossier ou affiche le chemin actuel
                 }
-                else if (command.Substring(0,3) == "dir" && command.Length >= 3)
+                else if (commandSplit[0] == "dir")
                 {
                     if (command == "dir")
                     {                        
@@ -44,17 +46,14 @@ namespace My_Console_Text
                     {                        
                         ListFiles(_currentDirectory); // Affiche uniquement les fichiers
                     }
-                    else if(command.Substring(0,6) == "dir /t" && command.Length >= 6)// commence
+                    else if ( command.Length >= 6 && command.Substring(0,6) == "dir /t")// commence
                     {
                         Alphabetique(_currentDirectory, command.Substring(7));// commence a partir du 7eme charatere
                     }
                 }
                 else if (command == "history")
                 {
-                    foreach(string item in history)
-                    {
-                        Console.WriteLine(item);
-                    }
+                    Console.WriteLine(String.Join("\n", history));
                 }
                 else if (command == "cls-history")
                 {
@@ -167,13 +166,8 @@ namespace My_Console_Text
             try
             {
                 string[] dirs = Directory.GetDirectories(path, searchPattern);
-                Console.WriteLine("The number of directories starting with {0} is {1}.",searchPattern,  dirs.Length);
-
-                foreach (string dir in dirs)
-
-                {
-                    Console.WriteLine(dir);
-                }
+                Console.WriteLine("The number of directories starting with {0} is {1}.", searchPattern, dirs.Length);
+                Console.WriteLine(String.Join('\n', dirs));
             }
             catch (Exception e)
             {
