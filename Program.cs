@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using Microsoft.VisualBasic;
+=======
+using Microsoft.VisualBasic;
+>>>>>>> 073ed49d986e931537d869ef6d742572462c95d3
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
