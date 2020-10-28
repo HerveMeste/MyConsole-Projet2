@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 
@@ -11,49 +12,69 @@ namespace My_Console_Text
     {
         static void Main(string[] args)
         {
-            Console.BackgroundColor = ConsoleColor.Green;
             MyConsole console = new MyConsole();
             console.Run();
         }
     }
     public class MyConsole
     {
+        string[] commandSplit;
         List<string> history = new List<string>();
         private String _currentDirectory = "C:\\Users";
         public void Run()
         {
-            
-            while(true)
+
+            while (true)
             {
                 String command = Prompt();
+                commandSplit = command.Split();
                 history.Add(command);
-                string[] commandSplit = command.Split();
+
                 if (command == "cd ..")
                 {
-                    ChangeDirectory(_currentDirectory);// Revien au repertoire parents
+                    ChangeDirectory(_currentDirectory); // Revien au repertoire parents
                 }
                 else if (commandSplit[0] == "cd")
                 {
                     ChangeDirectoryCd(_currentDirectory, command); // Ouvre un dossier ou affiche le chemin actuel
                 }
+                else if (commandSplit[0] == "color")
+                {
+                    ListeColor();
+                }
+                else if (commandSplit[0] == "fgcolor")
+                {
+                    ChangeFgColor(command);
+                }
+                else if (commandSplit[0] == "bgcolor")
+                {
+                    ChangeBgColor(command);
+                }
                 else if (commandSplit[0] == "dir")
                 {
                     if (command == "dir")
-                    {                        
-                       ListDirectory(_currentDirectory); //Affiche uniquement les dossiers
+                    {
+                        ListDirectory(_currentDirectory); //Affiche uniquement les dossiers
                     }
-                    else if(command == "dir /l")
-                    {                        
+                    else if (commandSplit[1] == "/l")
+                    {
                         ListFiles(_currentDirectory); // Affiche uniquement les fichiers
                     }
-                    else if ( command.Length >= 6 && command.Substring(0,6) == "dir /t")// commence
+                    else if (commandSplit[1] == "/t" && commandSplit.Length == 3)
                     {
-                        Alphabetique(_currentDirectory, command.Substring(7));// commence a partir du 7eme charatere
+                        Alphabetique(_currentDirectory, commandSplit[2]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("mauvaise commande");
                     }
                 }
                 else if (command == "history")
                 {
-                    Console.WriteLine(String.Join("\n", history));
+                    foreach (string item in history)
+                    {
+                        Console.WriteLine(item);
+                    }
                 }
                 else if (command == "cls-history")
                 {
@@ -81,7 +102,6 @@ namespace My_Console_Text
             return command;
 
         }
-
         public void ChangeDirectoryCd(String newPath, string command)
         {
             string chem;
@@ -92,28 +112,29 @@ namespace My_Console_Text
             }
             else if (_currentDirectory == "C:\\")
             {
-                chem = _currentDirectory + command.Substring(3);
+                chem = _currentDirectory + commandSplit[1];
             }
             else
-            {            
-                chem = _currentDirectory + "\\" + command.Substring(3);
+            {
+                chem = _currentDirectory + "\\" + commandSplit[1];
             }
+
             string[] tabfichier = Directory.GetFileSystemEntries(_currentDirectory);
+
             for (int i = 0; i < tabfichier.Length; i++)
             {
                 if (tabfichier[i] == chem)
                 {
-                    if(_currentDirectory == "C:\\")
+                    if (_currentDirectory == "C:\\")
                     {
-                        
-                        newPath = _currentDirectory + command.Substring(3);
+
+                        newPath = _currentDirectory + commandSplit[1];
                         _currentDirectory = newPath;
-                        
                         return;
                     }
                     else
                     {
-                        newPath = _currentDirectory + "\\" + command.Substring(3);
+                        newPath = _currentDirectory + "\\" + commandSplit[1];
                         _currentDirectory = newPath;
                         return;
                     }
@@ -121,11 +142,10 @@ namespace My_Console_Text
             }
             Console.WriteLine("repertoire inexistant");
         }
-
         public void ChangeDirectory(String newPath)
         {
             try
-            {               
+            {
                 string parent = Directory.GetParent(newPath).FullName;
                 _currentDirectory = parent;
             }
@@ -141,7 +161,6 @@ namespace My_Console_Text
             }
 
         }
-
         public void ListDirectory(String directoryPath)
         {
             IEnumerable<String> listedDirectories = Directory.EnumerateDirectories(directoryPath);
@@ -151,7 +170,6 @@ namespace My_Console_Text
                 Console.WriteLine(date + " " + item);
             }
         }
-
         public void ListFiles(String directoryPath)
         {
             IEnumerable<String> listedFiles = Directory.EnumerateFiles(directoryPath);
@@ -167,12 +185,53 @@ namespace My_Console_Text
             {
                 string[] dirs = Directory.GetDirectories(path, searchPattern);
                 Console.WriteLine("The number of directories starting with {0} is {1}.", searchPattern, dirs.Length);
-                Console.WriteLine(String.Join('\n', dirs));
+
+                foreach (string dir in dirs)
+
+                {
+                    Console.WriteLine(dir);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("The process failed: {0}", e.ToString());
             }
         }
+        public static void ChangeFgColor(string commande)
+        {
+            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+
+            foreach (var color in colors)
+            {
+                if (Convert.ToString(color) == commande.Substring(8))
+                {
+                    Console.ForegroundColor = color;
+                    return;
+                }
+            }
+            Console.WriteLine("La couleur ou la syntaxe n'existe pas, taper 'color' pour voir la liste des couleurs disponible");
+        }
+        public static void ListeColor()
+        {
+            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+
+            Console.WriteLine(String.Join("\n", colors));
+        }
+        public static void ChangeBgColor(string commande)
+        {
+            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+
+            foreach (var color in colors)
+            {
+                if (Convert.ToString(color) == commande.Substring(8))
+                {
+                    Console.BackgroundColor = color;
+                    Console.Clear();
+                    return;
+                }
+            }
+            Console.WriteLine("La couleur ou la syntaxe n'existe pas, taper 'color' pour voir la liste des couleurs disponible");
+        }
     }
 }
+
