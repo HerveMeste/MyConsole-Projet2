@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -22,7 +23,7 @@ namespace My_Console_Text
             {
                 String parent = Directory.GetParent(".").FullName;
                 Directory.SetCurrentDirectory(parent);
-                
+
             }
             else if (fullCommand.Length == 2) // regler le probleme d'une mauvaise saisie.
             {
