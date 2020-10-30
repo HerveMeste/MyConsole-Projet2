@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace My_Console_Text
 {
@@ -13,14 +14,23 @@ namespace My_Console_Text
 
         public override void Execute(String[] fullCommand)
         {
-            if (fullCommand[1] == "..")
+            if (fullCommand.Length == 1)
+            {
+                // afficher seulement l'adresse d'ou on se trouve 
+            }
+            else if (fullCommand.Length == 2 && fullCommand[1] == "..")
             {
                 String parent = Directory.GetParent(".").FullName;
                 Directory.SetCurrentDirectory(parent);
+                
+            }
+            else if (fullCommand.Length == 2) // regler le probleme d'une mauvaise saisie.
+            {
+                Directory.SetCurrentDirectory(fullCommand[1]);
             }
             else
             {
-                Directory.SetCurrentDirectory(fullCommand[1]);
+                Console.WriteLine("Mauvaise commande");
             }
         }
     }
