@@ -244,6 +244,7 @@ namespace My_Console_Text
                 }
             }
             Console.WriteLine("La couleur ou la syntaxe n'existe pas, taper 'color' pour voir la liste des couleurs disponible");
+            //hello
         }
     }
 }
