@@ -41,12 +41,24 @@ namespace My_Console_Text
             {
                 try
                 {
-                    string[] dirs = Directory.GetDirectories(Directory.GetCurrentDirectory(), fullCommand[2]);
-                    Console.WriteLine("The number of directories starting with {0} is {1}.", fullCommand[2], dirs.Length);
-                    foreach (string dir in dirs)
+                    string[] directorySort = Directory.GetDirectories(Directory.GetCurrentDirectory(), fullCommand[2]);
+                    string[] filesSort = Directory.GetFiles(Directory.GetCurrentDirectory(), fullCommand[2]);
+                   
+                    foreach (string directory in directorySort)
                     {
-                        Console.WriteLine(dir);
+                        string[] path = directory.Split("\\");
+                        string last = path[path.Length - 1];
+                        DateTime date = Directory.GetCreationTime(directory); 
+                        Console.WriteLine(date + "     <DIR>     " + last);
                     }
+                    foreach (string files in filesSort)
+                    {
+                        string[] path = files.Split("\\");
+                        string last = path[path.Length - 1];
+                        DateTime date = Directory.GetCreationTime(files);
+                        Console.WriteLine(date + "               " + last);
+                    }
+                    Console.WriteLine("\nThe number of directories starting with {0} is : {2} \nThe number of files starting with {0} is : {1}.", fullCommand[2], filesSort.Length, directorySort.Length);
                 }
                 catch (Exception e)
                 {
