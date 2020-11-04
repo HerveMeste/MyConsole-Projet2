@@ -17,21 +17,28 @@ namespace My_Console_Text
         {
             if (fullCommand.Length == 1)
             {
-                // afficher seulement l'adresse d'ou on se trouve 
-            }
-            else if (fullCommand.Length == 2 && fullCommand[1] == "..")
-            {
-                String parent = Directory.GetParent(".").FullName;
-                Directory.SetCurrentDirectory(parent);
-
-            }
-            else if (fullCommand.Length == 2) // regler le probleme d'une mauvaise saisie.
-            {
-                Directory.SetCurrentDirectory(fullCommand[1]);
+                Console.WriteLine(Directory.GetCurrentDirectory());
             }
             else
             {
-                Console.WriteLine("Mauvaise commande");
+                try
+                {
+                    Directory.SetCurrentDirectory(fullCommand[1]);
+                }
+                catch
+                {
+                    string[] arrayPath = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory());
+                    fullCommand[1] = Directory.GetCurrentDirectory() + "\\" + fullCommand[1];
+                    for (int i = 0; i < arrayPath.Length; i++)
+                    {
+                        if (arrayPath[i] == fullCommand[1])
+                        {
+                            Directory.SetCurrentDirectory(fullCommand[1]);
+                            return;
+                        }
+                    }
+                    Console.WriteLine("Wrong command");
+                }
             }
         }
     }
