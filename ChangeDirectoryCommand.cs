@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
 
@@ -21,6 +22,13 @@ namespace My_Console_Text
             }
             else
             {
+                if (fullCommand.Length > 2)
+                {
+                    for (int i = 2; i < fullCommand.Length; i++)
+                    {
+                        fullCommand[1] = fullCommand[1] + " " + fullCommand[i];
+                    }
+                }
                 try
                 {
                     Directory.SetCurrentDirectory(fullCommand[1]);
@@ -39,6 +47,7 @@ namespace My_Console_Text
                     }
                     Console.WriteLine("Wrong command");
                 }
+
             }
         }
     }

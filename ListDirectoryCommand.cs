@@ -13,7 +13,7 @@ namespace My_Console_Text
             if (fullCommand.Length == 1)
             {
                 string currentDirectory = Directory.GetCurrentDirectory();
-                
+
                 int i = 0;
                 int j = 0;
                 IEnumerable<String> listDirectory = Directory.EnumerateDirectories(Directory.GetCurrentDirectory());
@@ -35,8 +35,25 @@ namespace My_Console_Text
                     Console.WriteLine(date + "               " + last);
                 }
                 Console.WriteLine("il y a : " + i + " dossiers et " + j + " fichiers");
-                
+
             }
+            if (fullCommand.Length == 3 && fullCommand[1] == "/t")
+            {
+                try
+                {
+                    string[] dirs = Directory.GetDirectories(Directory.GetCurrentDirectory(), fullCommand[2]);
+                    Console.WriteLine("The number of directories starting with {0} is {1}.", fullCommand[2], dirs.Length);
+                    foreach (string dir in dirs)
+                    {
+                        Console.WriteLine(dir);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed: {0}", e.ToString());
+                }
+            }
+
         }
     }
 }
