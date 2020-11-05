@@ -14,10 +14,7 @@ namespace My_Console_Text
         {
             String[] userEntry = Prompt();
             history.Add(userEntry[0]);
-            if (userEntry.Length == 1 && userEntry[0] == "history")
-            {
-                Console.WriteLine(String.Join("\n", history));
-            }
+
             foreach (BaseCommand command in _avalaibleCommands)
             {                
                 if (command.Name == userEntry[0])
