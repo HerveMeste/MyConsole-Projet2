@@ -10,6 +10,7 @@ namespace My_Console_Text
         public override void Execute(String[] fullCommand)
         {
             ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+            ClearCommand clear = new ClearCommand();
             if (fullCommand.Length == 1)
             {
                 Console.WriteLine(String.Join("\n", colors));
@@ -24,7 +25,6 @@ namespace My_Console_Text
                         return;
                     }
                 }
-                Console.WriteLine("La couleur ou la syntaxe n'existe pas, taper 'color' pour voir la liste des couleurs disponible");
             }
             else if (fullCommand.Length == 3 && fullCommand[1] == "bg")
             {
@@ -33,12 +33,12 @@ namespace My_Console_Text
                     if (Convert.ToString(color) == fullCommand[2])
                     {
                         Console.BackgroundColor = color;
-                        Console.Clear();
+                        clear.Execute(fullCommand);
                         return;
                     }
                 }
-                Console.WriteLine("La couleur ou la syntaxe n'existe pas, taper 'color' pour voir la liste des couleurs disponible");
             }
+            Console.WriteLine("La couleur ou la syntaxe n'existe pas, taper 'color' pour voir la liste des couleurs disponible");
         }
     }
 }

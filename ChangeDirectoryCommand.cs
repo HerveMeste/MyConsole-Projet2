@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
@@ -16,38 +17,30 @@ namespace My_Console_Text
 
         public override void Execute(String[] fullCommand)
         {
-            if (fullCommand.Length == 1)
-            {
-                Console.WriteLine(Directory.GetCurrentDirectory());
+            if (fullCommand.Length > 2)
+            {               
+                for (int i = 2; i < fullCommand.Length; i++)
+                {
+                    fullCommand[1] = fullCommand[1] + " " + fullCommand[i];
+                }
             }
-            else
+            try
             {
-                if (fullCommand.Length > 2)
+                Directory.SetCurrentDirectory(fullCommand[1]);
+            }
+            catch
+            {
+                string[] arrayPath = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory());
+                fullCommand[1] = Directory.GetCurrentDirectory() + "\\" + fullCommand[1];
+                for (int i = 0; i < arrayPath.Length; i++)
                 {
-                    for (int i = 2; i < fullCommand.Length; i++)
+                    if (arrayPath[i] == fullCommand[1])
                     {
-                        fullCommand[1] = fullCommand[1] + " " + fullCommand[i];
+                        Directory.SetCurrentDirectory(fullCommand[1]);
+                        return;
                     }
                 }
-                try
-                {
-                    Directory.SetCurrentDirectory(fullCommand[1]);
-                }
-                catch
-                {
-                    string[] arrayPath = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory());
-                    fullCommand[1] = Directory.GetCurrentDirectory() + "\\" + fullCommand[1];
-                    for (int i = 0; i < arrayPath.Length; i++)
-                    {
-                        if (arrayPath[i] == fullCommand[1])
-                        {
-                            Directory.SetCurrentDirectory(fullCommand[1]);
-                            return;
-                        }
-                    }
-                    Console.WriteLine("Wrong command");
-                }
-
+                Console.WriteLine("Wrong command");
             }
         }
     }

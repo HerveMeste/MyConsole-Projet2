@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 
 namespace My_Console_Text
 {
@@ -20,11 +22,10 @@ namespace My_Console_Text
                 IEnumerable<String> listFiles = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
                 foreach (string item in listDirectory)
                 {
-                    string[] path = item.Split("\\");
-                    i++;
-                    string last = path[path.Length - 1];
+                    //string[] path = item.Split("\\");
+                    IEnumerable<String> result = listDirectory.TakeLast(1);                  
                     DateTime date = Directory.GetCreationTime(item);
-                    Console.WriteLine(date + "     <DIR>     " + last);
+                    Console.WriteLine(date + "     <DIR>     " + String.Join("",result));
                 }
                 foreach (string item in listFiles)
                 {
@@ -34,7 +35,7 @@ namespace My_Console_Text
                     DateTime date = Directory.GetCreationTime(item);
                     Console.WriteLine(date + "               " + last);
                 }
-                Console.WriteLine("il y a : " + i + " dossiers et " + j + " fichiers");
+                Console.WriteLine("il y a : " + listDirectory.Count() + " dossiers et " + listFiles.Count() + " fichiers");
 
             }
             if (fullCommand.Length == 3 && fullCommand[1] == "/t")
