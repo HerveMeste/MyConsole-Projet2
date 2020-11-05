@@ -12,56 +12,30 @@ namespace My_Console_Text
 
         public override void Execute(string[] fullCommand)
         {
+            IEnumerable<string> listDirectory = Directory.EnumerateDirectories(Directory.GetCurrentDirectory());
+            IEnumerable<string> listFiles = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
+            IEnumerable<string> listDirFiles = listDirectory.Concat(listFiles);
             if (fullCommand.Length == 1)
             {
-                string currentDirectory = Directory.GetCurrentDirectory();
-                IEnumerable<String> listDirectory = Directory.EnumerateDirectories(Directory.GetCurrentDirectory());
-                IEnumerable<String> listFiles = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
-                foreach (string item in listDirectory)
-                {
-                    string[] path = item.Split("\\");
-                    IEnumerable<String> result = path.TakeLast(1);                  
-                    DateTime date = Directory.GetCreationTime(item);
-                    Console.WriteLine(date + "     <DIR>     " + String.Join("",result));
-                }
-                foreach (string item in listFiles)
-                {
-                    string[] path = item.Split("\\");
-                    IEnumerable<String> result = path.TakeLast(1);
-                    DateTime date = Directory.GetCreationTime(item);
-                    Console.WriteLine(date + "               " + String.Join("", result));
-                }
-                Console.WriteLine("il y a : " + listDirectory.Count() + " dossiers et " + listFiles.Count() + " fichiers");
-
+                PrintFileDirectoryDate(listDirFiles);
             }
             if (fullCommand.Length == 3 && fullCommand[1] == "/t")
             {
-                try
-                {
-                    string[] directorySort = Directory.GetDirectories(Directory.GetCurrentDirectory(), fullCommand[2]);
-                    string[] filesSort = Directory.GetFiles(Directory.GetCurrentDirectory(), fullCommand[2]);
-                   
-                    foreach (string directory in directorySort)
-                    {
-                        string[] path = directory.Split("\\");
-                        IEnumerable<String> result = path.TakeLast(1);
-                        DateTime date = Directory.GetCreationTime(directory); 
-                        Console.WriteLine(date + "     <DIR>     " + String.Join("", result));
-                    }
-                    foreach (string files in filesSort)
-                    {
-                        string[] path = files.Split("\\");
-                        IEnumerable<String> result = path.TakeLast(1);
-                        DateTime date = Directory.GetCreationTime(files);
-                        Console.WriteLine(date + "               " + String.Join("", result));
-                    }
-                    Console.WriteLine("\nThe number of directories starting with {0} is : {2} \nThe number of files starting with {0} is : {1}.", fullCommand[2], filesSort.Length, directorySort.Length);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("The process failed: {0}", e.ToString());
-                }
-            }           
+                IEnumerable<string> listDirectorySort = Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), fullCommand[2]);
+                IEnumerable<string> listFilesSort = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fullCommand[2]);
+                IEnumerable<string> listDirFilesSort = listDirectorySort.Concat(listFilesSort);
+                PrintFileDirectoryDate(listDirFilesSort);
+            }
+        }
+        public void PrintFileDirectoryDate(IEnumerable<string> tableau)
+        {
+            foreach (string element in tableau)
+            {
+                string[] path = element.Split("\\");
+                IEnumerable<String> result = path.TakeLast(1);
+                DateTime date = Directory.GetCreationTime(element);
+                Console.WriteLine(date + "          " + String.Join("", result));
+            }
         }
     }
 }

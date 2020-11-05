@@ -7,7 +7,7 @@ namespace My_Console_Text
 {
     public class MyConsole
     {
-        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new ClearCommand(), new PwdCommand()};
+        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new FGColorCommand(), new BGColorCommand(),new ClearCommand(), new PwdCommand()};
         List<string> history = new List<string>();
         
         public void Run()
