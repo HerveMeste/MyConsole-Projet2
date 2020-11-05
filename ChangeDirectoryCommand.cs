@@ -24,12 +24,12 @@ namespace My_Console_Text
                     fullCommand[1] = fullCommand[1] + " " + fullCommand[i];
                 }
             }
-            //try
-            //{
+            try
+            {
                 Directory.SetCurrentDirectory(fullCommand[1]);
-            //}
-            //catch
-            //{
+            }
+            catch
+            {
                 string[] arrayPath = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory());
                 fullCommand[1] = Directory.GetCurrentDirectory() + "\\" + fullCommand[1];
                 for (int i = 0; i < arrayPath.Length; i++)
@@ -41,7 +41,7 @@ namespace My_Console_Text
                     }
                 }
                 Console.WriteLine("Wrong command");
-            //}
+            }
         }
     }
 }
