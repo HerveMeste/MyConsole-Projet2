@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -16,12 +17,31 @@ namespace My_Console_Text
             history.Add(userEntry[0]);
 
             foreach (BaseCommand command in _avalaibleCommands)
-            {                
+            {
                 if (command.Name == userEntry[0])
                 {
                     command.Execute(userEntry);
+                    return;
                 }
             }
+            RedirectionSystemMethod(userEntry);
+        }
+
+        public void RedirectionSystemMethod(string[] userEntry)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            if (userEntry.Length >= 2)
+            {
+                for (int i = 1; i < userEntry.Length; i++)
+                {
+                    userEntry[0] = userEntry[0] + " " + userEntry[i];
+                }
+            }
+            process.StartInfo.Arguments = "/C " + userEntry[0]; //+" "+ userEntry[1]; // Commande à exécuter
+            process.StartInfo.UseShellExecute = false;
+            process.Start();
+            process.Close();
         }
 
         public String[] Prompt()
