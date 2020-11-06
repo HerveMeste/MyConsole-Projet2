@@ -14,7 +14,11 @@ namespace My_Console_Text
                 ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
                 Console.WriteLine(String.Join("\n", colors));
             }
-            Console.WriteLine("Mauvaise commande");
+            else
+            {
+                Console.WriteLine("Mauvaise commande");
+            }
+           
         }
     }
 }
