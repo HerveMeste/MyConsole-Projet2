@@ -8,7 +8,7 @@ namespace My_Console_Text
 {
     public class MyConsole
     {
-        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new FGColorCommand(), new BGColorCommand(),new ClearCommand(), new PwdCommand()};
+        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new FGColorCommand(), new BGColorCommand(),new ClearCommand(), new PwdCommand(),new ExitCommand()};
         List<string> history = new List<string>();
         
         public void Run()
@@ -24,25 +24,9 @@ namespace My_Console_Text
                     return;
                 }
             }
-            RedirectionSystemMethod(userEntry);
+            RedirectionSystemCommand.RedirectionSystemMethod(userEntry);
         }
 
-        public void RedirectionSystemMethod(string[] userEntry)
-        {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            if (userEntry.Length >= 2)
-            {
-                for (int i = 1; i < userEntry.Length; i++)
-                {
-                    userEntry[0] = userEntry[0] + " " + userEntry[i];
-                }
-            }
-            process.StartInfo.Arguments = "/C " + userEntry[0]; //+" "+ userEntry[1]; // Commande à exécuter
-            process.StartInfo.UseShellExecute = false;
-            process.Start();
-            process.Close();
-        }
 
         public String[] Prompt()
         {
