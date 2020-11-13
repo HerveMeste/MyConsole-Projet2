@@ -1,6 +1,6 @@
 namespace My_Console_Text
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -7,7 +8,7 @@ namespace My_Console_Text
 {
     public class MyConsole
     {
-        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new FGColorCommand(), new BGColorCommand(),new ClearCommand(), new PwdCommand()};
+        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new FGColorCommand(), new BGColorCommand(),new ClearCommand(), new PwdCommand(),new ExitCommand()};
         List<string> history = new List<string>();
         
         public void Run()
@@ -16,13 +17,16 @@ namespace My_Console_Text
             history.Add(userEntry[0]);
 
             foreach (BaseCommand command in _avalaibleCommands)
-            {                
+            {
                 if (command.Name == userEntry[0])
                 {
                     command.Execute(userEntry);
+                    return;
                 }
             }
+            RedirectionSystemCommand.RedirectionSystemMethod(userEntry);
         }
+
 
         public String[] Prompt()
         {

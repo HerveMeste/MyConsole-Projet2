@@ -6,4 +6,8 @@
     <RootNamespace>My_Console_Text</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
+  </ItemGroup>
+
 </Project>
