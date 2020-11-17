@@ -8,30 +8,22 @@ namespace My_Console_Text
 {
     public class MyConsole
     {
-        private readonly BaseCommand[] _avalaibleCommands = { new ChangeDirectoryCommand(), new ListDirectoryCommand(), new ColorCommand(), new FGColorCommand(), new BGColorCommand(),new ClearCommand(), new PwdCommand(),new ExitCommand()};
+        private readonly BaseCommand[] _avalaibleCommands = { new ColorCommand(), new ChangeDirectoryCommand(),new ListDirectoryCommand(), new FGColorCommand(), new BGColorCommand(), new ClearCommand(), new PwdCommand(), new ExitCommand() };
         List<string> history = new List<string>();
         
         public void Run()
         {
-            String[] userEntry = Prompt();
-            history.Add(userEntry[0]);
-
+            PromptMethode prompt = new PromptMethode();
+            FullCommand userEntry = prompt.Prompt();           
             foreach (BaseCommand command in _avalaibleCommands)
             {
-                if (command.Name == userEntry[0])
+                if (command.Name == userEntry.command)
                 {
                     command.Execute(userEntry);
                     return;
                 }
             }
             RedirectionSystemCommand.RedirectionSystemMethod(userEntry);
-        }
-
-
-        public String[] Prompt()
-        {
-            Console.Write(Directory.GetCurrentDirectory() + "> ");
-            return Console.ReadLine().Split();
-        }
+        }    
     }
 }
