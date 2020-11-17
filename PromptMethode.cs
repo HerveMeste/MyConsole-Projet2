@@ -16,8 +16,6 @@ namespace My_Console_Text
             {
                 string command = line;
                 string argument = "";
-                Console.WriteLine(command);
-                Console.WriteLine(argument);
                 return new FullCommand(command, argument);
 
             }
@@ -25,8 +23,6 @@ namespace My_Console_Text
             {
                 string command = line.Substring(0, spacePosition);
                 string argument = line.Substring(spacePosition + 1);
-                Console.WriteLine(command);
-                Console.WriteLine(argument);
                 return new FullCommand(command, argument);
             }
         }

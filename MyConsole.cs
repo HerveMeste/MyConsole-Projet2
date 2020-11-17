@@ -8,9 +8,7 @@ namespace My_Console_Text
 {
     public class MyConsole
     {
-        private readonly BaseCommand[] _avalaibleCommands = { new ColorCommand(), new ChangeDirectoryCommand(),new ListDirectoryCommand(), new FGColorCommand(), new BGColorCommand(), new ClearCommand(), new PwdCommand(), new ExitCommand() };
-        List<string> history = new List<string>();
-        
+        private readonly BaseCommand[] _avalaibleCommands = { new ColorCommand(), new ChangeDirectoryCommand(),new ListDirectoryCommand(), new FGColorCommand(), new BGColorCommand(), new ClearCommand(), new PwdCommand(), new ExitCommand() };       
         public void Run()
         {
             PromptMethode prompt = new PromptMethode();
