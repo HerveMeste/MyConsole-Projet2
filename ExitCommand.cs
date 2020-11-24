@@ -4,10 +4,10 @@ using System.Text;
 
 namespace My_Console_Text
 {
-    class ExitCommand : BaseCommand
+  class ExitCommand : BaseCommand
     {
         public override string Name => "exit";
-        public override void Execute(string[] fullCommand) 
+        public override void Execute(FullCommand fullCommand) 
         {
             Environment.Exit(0);
         }

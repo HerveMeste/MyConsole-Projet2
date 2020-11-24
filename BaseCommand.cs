@@ -7,6 +7,6 @@ namespace My_Console_Text
     public abstract class BaseCommand
     {
         public abstract String Name { get; }
-        public abstract void Execute(String[] fullCommand);
+        public abstract void Execute(FullCommand fullCommand);
     }
 }

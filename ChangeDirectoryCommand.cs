@@ -14,29 +14,21 @@ namespace My_Console_Text
     public class ChangeDirectoryCommand : BaseCommand
     {
         public override String Name { get => "cd"; }
-
-        public override void Execute(String[] fullCommand)
+        public override void Execute(FullCommand fullCommand)
         {
-            if (fullCommand.Length > 2)
-            {               
-                for (int i = 2; i < fullCommand.Length; i++)
-                {
-                    fullCommand[1] = fullCommand[1] + " " + fullCommand[i];
-                }
-            }
             try
             {
-                Directory.SetCurrentDirectory(fullCommand[1]);
+                Directory.SetCurrentDirectory(fullCommand.argument);
             }
             catch
             {
                 string[] arrayPath = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory());
-                fullCommand[1] = Directory.GetCurrentDirectory() + "\\" + fullCommand[1];
+                string Path = Directory.GetCurrentDirectory() + "\\" + fullCommand.argument;
                 for (int i = 0; i < arrayPath.Length; i++)
                 {
-                    if (arrayPath[i] == fullCommand[1])
+                    if (arrayPath[i] == Path)
                     {
-                        Directory.SetCurrentDirectory(fullCommand[1]);
+                        Directory.SetCurrentDirectory(fullCommand.argument);
                         return;
                     }
                 }

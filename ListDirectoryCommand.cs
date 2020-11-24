@@ -10,22 +10,22 @@ namespace My_Console_Text
     {
         public override string Name => "dir";
 
-        public override void Execute(string[] fullCommand)
+        public override void Execute(FullCommand fullCommand)
         {
             IEnumerable<string> listDirectory = Directory.EnumerateDirectories(Directory.GetCurrentDirectory());
             IEnumerable<string> listFiles = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
             IEnumerable<string> listDirFiles = listDirectory.Concat(listFiles);
-            if (fullCommand.Length == 1)
+            if (fullCommand.argument == "")
             {
                 PrintFileDirectoryDate(listDirFiles);
             }
-            if (fullCommand.Length == 3 && fullCommand[1] == "/t")
+            else
             {
-                IEnumerable<string> listDirectorySort = Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), fullCommand[2]);
-                IEnumerable<string> listFilesSort = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fullCommand[2]);
+                IEnumerable<string> listDirectorySort = Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), fullCommand.argument);
+                IEnumerable<string> listFilesSort = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fullCommand.argument);
                 IEnumerable<string> listDirFilesSort = listDirectorySort.Concat(listFilesSort);
                 PrintFileDirectoryDate(listDirFilesSort);
-            }
+            }            
         }
         public void PrintFileDirectoryDate(IEnumerable<string> tableau)
         {

@@ -9,7 +9,7 @@ namespace My_Console_Text
     {
         public override String Name { get => "pwd"; }
 
-        public override void Execute(string[] fullCommand)
+        public override void Execute(FullCommand fullCommand)
         {
             Console.WriteLine(Directory.GetCurrentDirectory()+"\n");
         }

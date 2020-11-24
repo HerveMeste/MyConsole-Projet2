@@ -8,22 +8,17 @@ namespace My_Console_Text
     {
         public override String Name { get => "fgcolor"; }
         ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-        public override void Execute(String[] fullCommand)
-        {
-            if (fullCommand.Length == 2)
+        public override void Execute(FullCommand fullCommand)
+        {           
+            foreach (var color in colors)
             {
-                foreach (var color in colors)
+                if (Convert.ToString(color) == fullCommand.argument)
                 {
-                    if (Convert.ToString(color) == fullCommand[1])
-                    {
-                        Console.ForegroundColor = color;
-                        return;
-                    }
+                    Console.ForegroundColor = color;
+                    return;
                 }
-                Console.WriteLine(" Mauvaise couleur choisie");
             }
-
-        }
- 
+            Console.WriteLine(" Mauvaise couleur choisie");
+        } 
     }
 }
