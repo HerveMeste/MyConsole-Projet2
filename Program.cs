@@ -9,7 +9,6 @@ namespace My_Console_Text
         {
             while (true)
             {
-                ConsolePrompt prompt = new ConsolePrompt();
                 String commandText = PromptLine();
                 BaseCommand command = CommandFactory.Create(commandText);
                 command.Execute();
