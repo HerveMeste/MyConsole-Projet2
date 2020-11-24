@@ -5,18 +5,18 @@ using System.Text;
 
 namespace My_Console_Text
 {
-    class RedirectionSystemCommand 
+    public class RedirectionSystemCommand : BaseCommand
     {
-        
-        public static void RedirectionSystemMethod(FullCommand userEntry)
+        public override string Name => Arguments[0];
+
+        public override void Execute()
         {
             Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "/C " + userEntry.command+" "+userEntry.argument;
+            process.StartInfo.Arguments = "/C " + Name + " " + String.Join(' ', Arguments);
             process.StartInfo.UseShellExecute = false;
             process.Start();
             process.Close();
         }
-
     }
 }

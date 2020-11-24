@@ -8,7 +8,7 @@ namespace My_Console_Text
     {
         public override String Name { get => "cls"; }
 
-        public override void Execute(FullCommand fullCommand)
+        public override void Execute()
         {
             Console.Clear();
         }

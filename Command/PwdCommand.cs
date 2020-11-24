@@ -9,9 +9,9 @@ namespace My_Console_Text
     {
         public override String Name { get => "pwd"; }
 
-        public override void Execute(FullCommand fullCommand)
+        public override void Execute()
         {
-            Console.WriteLine(Directory.GetCurrentDirectory()+"\n");
+            Console.WriteLine(Directory.GetCurrentDirectory() + "\n");
         }
     }
 }

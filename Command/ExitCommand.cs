@@ -7,7 +7,7 @@ namespace My_Console_Text
   class ExitCommand : BaseCommand
     {
         public override string Name => "exit";
-        public override void Execute(FullCommand fullCommand) 
+        public override void Execute() 
         {
             Environment.Exit(0);
         }
