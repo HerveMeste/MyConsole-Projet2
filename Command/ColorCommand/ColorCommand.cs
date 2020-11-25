@@ -6,7 +6,7 @@ namespace My_Console_Text
 {
     public class ColorCommand : BaseCommand
     {
-        public override String Name { get => "color"; }
+        public override String Command { get => "color"; }
         public override void Execute()
         {
             if (Arguments.Count == 0 )

@@ -12,13 +12,13 @@ namespace My_Console_Text
                                                                      new ListDirectoryCommand(), 
                                                                      new FGColorCommand(), 
                                                                      new BGColorCommand(), 
-                                                                     new ClearCommand(), 
                                                                      new PwdCommand(), 
                                                                      new ExitCommand() };
+                                                                      
         public static BaseCommand Create(String commandLine)
         {
             IList<String> commandParts = commandLine.Split();
-            BaseCommand resultingCommand = _availableCommands.FirstOrDefault((command) => command.Name == commandParts[0]);
+            BaseCommand resultingCommand = _availableCommands.FirstOrDefault((command) => command.Command == commandParts[0]);
             if (resultingCommand is null)
             {
                 resultingCommand = new RedirectionSystemCommand { Arguments = commandParts };
