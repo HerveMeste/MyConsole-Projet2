@@ -9,8 +9,15 @@ namespace My_Console_Text
         public override String Name { get => "color"; }
         public override void Execute()
         {
-            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-            Console.WriteLine(String.Join("\n", colors));
+            if (Arguments.Count == 0 )
+            {
+                ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+                Console.WriteLine(String.Join("\n", colors));
+            }
+            else
+            {
+                Console.WriteLine("erreur");
+            }
         }
     }
 }

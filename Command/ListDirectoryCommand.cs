@@ -9,7 +9,6 @@ namespace My_Console_Text
     public class ListDirectoryCommand : BaseCommand
     {
         public override string Name => "dir";
-
         private String Path { 
             get
             {
@@ -24,14 +23,31 @@ namespace My_Console_Text
 
         public override void Execute()
         {
-            IEnumerable<string> listDirectory = Directory.EnumerateDirectories(Path);
-            IEnumerable<string> listFiles = Directory.EnumerateFiles(Path);
-            IEnumerable<string> listDirFiles = listDirectory.Concat(listFiles);
-            PrintFileDirectoryDate(listDirFiles);
+            if (Arguments.Count == 2 && Arguments[0] == "/t")
+            {
+                IEnumerable<string> dirs = Directory.GetDirectories(Directory.GetCurrentDirectory(), Arguments[1]);
+                IEnumerable<string> file = Directory.GetFiles(Directory.GetCurrentDirectory(),Arguments[1]);
+                IEnumerable<string> listDirFilesSort = dirs.Concat(file);
+                Console.WriteLine("Il y a "+listDirFilesSort.Count()+" Dossier / Fichier commencant par " + Arguments[1]);
+                PrintFileDirectoryDate(listDirFilesSort);
+                return;
+            }
+            try
+            {
+                IEnumerable<string> listDirectory = Directory.EnumerateDirectories(Path);
+                IEnumerable<string> listFiles = Directory.EnumerateFiles(Path);
+                IEnumerable<string> listDirFiles = listDirectory.Concat(listFiles);
+                PrintFileDirectoryDate(listDirFiles);
+            }
+            catch
+            {
+                Console.WriteLine("Mauvaise commande");
+            }
         }
-        public void PrintFileDirectoryDate(IEnumerable<string> tableau)
+
+        public void PrintFileDirectoryDate(IEnumerable<string> liste)
         {
-            foreach (string element in tableau)
+            foreach (string element in liste)
             {
                 string[] path = element.Split("\\");
                 IEnumerable<String> result = path.TakeLast(1);

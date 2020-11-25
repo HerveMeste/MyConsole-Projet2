@@ -14,7 +14,6 @@ namespace My_Console_Text
                 command.Execute();
             }
         }
-
         static String PromptLine()
         {
             Console.Write(Directory.GetCurrentDirectory() + "> ");

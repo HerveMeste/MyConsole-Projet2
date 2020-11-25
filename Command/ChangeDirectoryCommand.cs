@@ -16,18 +16,15 @@ namespace My_Console_Text
         public override String Name { get => "cd"; }
 
         public override void Execute()
-        {
-            IList<String> availablePaths = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory());
-            String fullPath = Path.GetFullPath(Arguments[0]);
-            String desiredPath = fullPath;
-            if (Arguments[0] != "..")
+        {           
+            try
             {
-                desiredPath = availablePaths.FirstOrDefault((path) => path == fullPath);
+                Directory.SetCurrentDirectory(String.Join(" ", Arguments));
             }
-            if (!String.IsNullOrWhiteSpace(desiredPath))
+            catch
             {
-                Directory.SetCurrentDirectory(desiredPath);
-            }
+                Directory.GetCurrentDirectory();
+            }           
         }
     }
 }
