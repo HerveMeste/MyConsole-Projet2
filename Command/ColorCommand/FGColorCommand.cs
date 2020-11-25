@@ -7,7 +7,7 @@ namespace My_Console_Text
 {
     class FGColorCommand : BaseCommand
     {
-        public override String Command { get => "fgcolor"; }
+        public override String Commands { get => "fgcolor"; }
         public override void Execute()
         {
             ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));

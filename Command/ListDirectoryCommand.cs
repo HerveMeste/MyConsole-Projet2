@@ -8,7 +8,7 @@ namespace My_Console_Text
 {
     public class ListDirectoryCommand : BaseCommand
     {
-        public override string Command => "dir";
+        public override string Commands => "dir";
         private String Path { 
             get
             {

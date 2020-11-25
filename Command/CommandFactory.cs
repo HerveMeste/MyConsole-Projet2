@@ -18,7 +18,7 @@ namespace My_Console_Text
         public static BaseCommand Create(String commandLine)
         {
             IList<String> commandParts = commandLine.Split();
-            BaseCommand resultingCommand = _availableCommands.FirstOrDefault((command) => command.Command == commandParts[0]);
+            BaseCommand resultingCommand = _availableCommands.FirstOrDefault((command) => command.Commands == commandParts[0]);
             if (resultingCommand is null)
             {
                 resultingCommand = new RedirectionSystemCommand { Arguments = commandParts };

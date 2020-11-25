@@ -8,13 +8,13 @@ namespace My_Console_Text
 {
     public class RedirectionSystemCommand : BaseCommand
     {
-        public override string Command => Arguments[0];
+        public override string Commands => Arguments[0];
 
         public override void Execute()
         {
             Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "/C " + Command + " " + String.Join(" ", Arguments.Skip(1).ToList());
+            process.StartInfo.Arguments = "/C " + Commands + " " + String.Join(" ", Arguments.Skip(1).ToList());
             process.StartInfo.UseShellExecute = false;
             process.Start();
             process.Close();

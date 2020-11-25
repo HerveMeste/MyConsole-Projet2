@@ -7,7 +7,7 @@ namespace My_Console_Text
 {
     class BGColorCommand : BaseCommand
     {      
-        public override String Command { get => "bgcolor"; }
+        public override String Commands { get => "bgcolor"; }
 
         public override void Execute()
         {
