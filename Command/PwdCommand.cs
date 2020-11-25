@@ -7,7 +7,7 @@ namespace My_Console_Text
 {
     public class PwdCommand : BaseCommand
     {
-        public override String Commands { get => "pwd"; }
+        public override String Command { get => "pwd"; }
 
         public override void Execute()
         {

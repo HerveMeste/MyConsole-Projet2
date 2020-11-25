@@ -13,7 +13,7 @@ namespace My_Console_Text
 {
     public class ChangeDirectoryCommand : BaseCommand
     {
-        public override String Commands { get => "cd"; }
+        public override String Command { get => "cd"; }
 
         public override void Execute()
         {           
